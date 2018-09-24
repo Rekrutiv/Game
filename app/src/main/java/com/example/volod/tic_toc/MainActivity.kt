@@ -5,15 +5,23 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
-//import android.widget.EditText
 import android.widget.Toast
-
 import  kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
+     private val combinations:Array<IntArray> = arrayOf(
+                 intArrayOf(1,2,3),
+                 intArrayOf(4,5,6),
+                 intArrayOf(7,8,9),
+                 intArrayOf(1,4,7),
+                 intArrayOf(2,5,8),
+                 intArrayOf(3,6,9),
+                 intArrayOf(1,5,9),
+                 intArrayOf(3,5,7)
 
+    )
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -55,7 +63,7 @@ class MainActivity : AppCompatActivity() {
 
         if(ActivePlayer==1){
             buSelected.text="X"
-            buSelected.setBackgroundResource(R.color.blue)
+            buSelected.setBackgroundResource(R.color.orange)
             player1.add(cellID)
             ActivePlayer=2
 
@@ -89,43 +97,30 @@ class MainActivity : AppCompatActivity() {
       fun checkline(a:Int, b:Int, c:Int)=
          when {
 
-             (a==1&&b==2&&c==3)->{
+             (a==1&&b==2&&c==3)->
                  rowcoldiag="row1"
-                 IfPlayerWin(1,2,3)}
-             (a==4&&b==5&&c==6)->{
+             (a==4&&b==5&&c==6)->
                  rowcoldiag="row2"
-                 IfPlayerWin(4,5,6)}
-             (a==7&&b==8&&c==9)->{
+             (a==7&&b==8&&c==9)->
                  rowcoldiag="row3"
-                 IfPlayerWin(7,8,9)}
-             (a==1&&b==4&&c==7)->{
+             (a==1&&b==4&&c==7)->
                  rowcoldiag="column1"
-                 IfPlayerWin(1,4,7)}
-             (a==2&&b==5&&c==8)->{
+             (a==2&&b==5&&c==8)->
                  rowcoldiag="column2"
-                 IfPlayerWin(2,5,8)}
-             (a==3&&b==6&&c==9)->{
+             (a==3&&b==6&&c==9)->
                  rowcoldiag="column3"
-                 IfPlayerWin(3,6,9)}
-             (a==1&&b==5&&c==9)->{
+             (a==1&&b==5&&c==9)->
                  rowcoldiag="diagonal1"
-                 IfPlayerWin(1,5,9)}
-             (a==3&&b==5&&c==7)->{
+             (a==3&&b==5&&c==7)->
                  rowcoldiag="diagonal2"
-                 IfPlayerWin(3,5,7)}
              else->-1
 
         }
-
-        checkline(1,2,3)
-        checkline(4,5,6)
-        checkline(7,8,9)
-        checkline(1,4,7)
-        checkline(2,5,8)
-        checkline(3,6,9)
-        checkline(1,5,9)
-        checkline(3,5,7)
-
+                  for(combin in combinations) {
+                     var (a, b, c) = combin
+                         checkline(a, b, c)
+                         IfPlayerWin(a, b, c)
+                  }
     }
 
 
